@@ -1,11 +1,17 @@
-let accordians=document.querySelectorAll('.accordian');
+document.querySelectorAll('.accordian').forEach(accordion => {
+    const question = accordion.querySelector('.question');
+    const answer = accordion.querySelector('.answer');
+    const icon = accordion.querySelector('.icon');
 
-accordians.forEach(accordian =>{
-    let icon=accordian.querySelector('.icon');
-    let answer=accordian.querySelector('.answer');
+    question.addEventListener('click', () => {
+        const isActive = answer.style.maxHeight;
 
-    accordian.addEventListener('click',()=>{
-        icon.classList.toggle('active');
-        answer.classList.toggle('active');
-    })
-})
+        document.querySelectorAll('.answer').forEach(el => el.style.maxHeight = null);
+        document.querySelectorAll('.icon').forEach(el => el.classList.remove('active'));
+
+        if (!isActive) {
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+            icon.classList.add('active');
+        }
+    });
+});
